@@ -2,7 +2,7 @@ import React from "react";
 import { Route, Redirect } from "react-router-dom";
 import { Register } from "./components/auth/Register";
 
-export const App = () => {
+export const WhoYou = () => {
   return (
     <Route
       path="/register"
@@ -16,5 +16,3 @@ export const App = () => {
     />
   );
 };
-
-export default App;
