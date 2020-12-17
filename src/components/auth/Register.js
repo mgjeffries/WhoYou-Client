@@ -84,6 +84,18 @@ export const Register = (props) => {
             </Form.Group>
 
             <Form.Group>
+              <Form.Label>Phone</Form.Label>
+              <Form.Control
+                type="phone"
+                required
+                className="my-2"
+                name="phone"
+                onChange={handleFormChange}
+                value={formValues.phone || ""}
+              />
+            </Form.Group>
+
+            <Form.Group>
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
