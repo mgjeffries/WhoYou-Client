@@ -63,7 +63,7 @@ export const Register = (props) => {
           >
             <Image
               className="my-2"
-              src={"imagePlaceholder.png"}
+              src={require("./logo700.jpeg")}
               width={250}
               height={250}
             />

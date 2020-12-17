@@ -1,3 +1,6 @@
+Owl Icon by By [Julien Meysmans](https://thenounproject.com/M_Julz/)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
