@@ -45,9 +45,6 @@ export const Register = (props) => {
         // and redirect us on to the app with those values set
         localStorage.setItem("whoyou_user_token", res.token);
         localStorage.setItem("whoyou_user_id", res.user_id);
-        if (res.is_admin) {
-          localStorage.setItem("is_admin", "true");
-        }
         props.history.push("/");
       });
   };
