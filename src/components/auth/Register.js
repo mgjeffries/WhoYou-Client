@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Image, Form, Button, Row } from "react-bootstrap";
+import logoLargeDetail from "./logoLargeDetail.png";
 
 export const Register = (props) => {
   const [formValues, setFormValues] = useState({});
@@ -53,7 +54,6 @@ export const Register = (props) => {
 
   return (
     <main style={{ padding: "2rem" }}>
-      <h1 className="text-center">WhoYou</h1>
       <Form onSubmit={handleFormSubmit}>
         <Row className="justify-content-around" style={{ minHeight: "450px" }}>
           <Col
@@ -63,9 +63,9 @@ export const Register = (props) => {
           >
             <Image
               className="my-2"
-              src={require("./logo700.jpeg")}
-              width={250}
-              height={250}
+              src={logoLargeDetail}
+              width={1433 / 4}
+              height={1054 / 4}
             />
           </Col>
 
