@@ -71,7 +71,7 @@ export const Register = (props) => {
             md="5"
             className="d-flex flex-column align-items-center justify-content-center"
           >
-            <Form.Group>
+            <Form.Group className="container-fluid">
               <Form.Label>Name</Form.Label>
               <Form.Control
                 type="text"
@@ -83,7 +83,7 @@ export const Register = (props) => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className="container-fluid">
               <Form.Label>Phone</Form.Label>
               <Form.Control
                 type="phone"
@@ -95,7 +95,7 @@ export const Register = (props) => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className="container-fluid">
               <Form.Label>Email</Form.Label>
               <Form.Control
                 type="email"
@@ -107,7 +107,7 @@ export const Register = (props) => {
               />
             </Form.Group>
 
-            <Form.Group>
+            <Form.Group className="container-fluid">
               <Form.Label>Password</Form.Label>
               <Form.Control
                 type="password"

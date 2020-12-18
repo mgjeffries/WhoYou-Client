@@ -1,7 +1,7 @@
 import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logoLargeDetail from "./logoLargeDetail.png";
-import { Image, Button, Form } from "react-bootstrap";
+import { Image, Button, Form, Col } from "react-bootstrap";
 
 export const Login = () => {
   const email = useRef();
@@ -46,7 +46,11 @@ export const Login = () => {
           Close
         </button>
       </dialog>
-      <section>
+      <Col
+        sm="12"
+        md="5"
+        className="d-flex flex-column align-items-center justify-content-center mx-auto"
+      >
         <form className="form--login" onSubmit={handleLogin}>
           <Image
             className="my-2"
@@ -55,31 +59,28 @@ export const Login = () => {
             height={1054 / 4}
           />
 
-          <fieldset>
-            <label htmlFor="inputemail"> Email </label>
-            <input
-              ref={email}
+          <Form.Group className="container-fluid">
+            <Form.Label>Email</Form.Label>
+            <Form.Control
               type="email"
-              id="email"
-              className="form-control"
-              defaultValue="me@me.com"
-              placeholder="email"
+              ref={email}
               required
-              autoFocus
+              className="my-2"
+              name="email"
             />
-          </fieldset>
-          <fieldset>
-            <label htmlFor="inputPassword"> Password </label>
-            <input
-              ref={password}
+          </Form.Group>
+
+          <Form.Group className="container-fluid">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
               type="password"
-              id="password"
-              className="form-control"
-              defaultValue="me"
-              placeholder="Password"
               required
+              ref={password}
+              className="my-2"
+              name="password"
             />
-          </fieldset>
+          </Form.Group>
+
           <fieldset
             style={{
               textAlign: "center",
@@ -90,10 +91,10 @@ export const Login = () => {
             </Button>
           </fieldset>
         </form>
-      </section>
-      <section className="link--register">
-        <Link to="/register">Not a member yet?</Link>
-      </section>
+        <section className="link--register">
+          <Link to="/register">Not a member yet?</Link>
+        </section>
+      </Col>
     </main>
   );
 };
