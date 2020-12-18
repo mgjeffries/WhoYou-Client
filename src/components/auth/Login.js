@@ -1,10 +1,10 @@
 import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import "./Auth.css";
-import Button from "react-bootstrap/Button";
+import logoLargeDetail from "./logoLargeDetail.png";
+import { Image, Button, Form } from "react-bootstrap";
 
 export const Login = () => {
-  const username = useRef();
+  const email = useRef();
   const password = useRef();
   const invalidDialog = useRef();
   const history = useHistory();
@@ -19,18 +19,15 @@ export const Login = () => {
         Accept: "application/json",
       },
       body: JSON.stringify({
-        username: username.current.value,
+        email: email.current.value,
         password: password.current.value,
       }),
     })
       .then((res) => res.json())
       .then((res) => {
         if (res.valid) {
-          localStorage.setItem("rare_user_token", res.token);
-          localStorage.setItem("rare_user_id", res.user_id);
-          if (res.is_admin) {
-            localStorage.setItem("is_admin", "true");
-          }
+          localStorage.setItem("whoyou_user_token", res.token);
+          localStorage.setItem("whoyou_user_id", res.user_id);
           history.push("/");
         } else {
           invalidDialog.current.showModal();
@@ -41,7 +38,7 @@ export const Login = () => {
   return (
     <main className="container--login">
       <dialog className="dialog dialog--auth" ref={invalidDialog}>
-        <div>username or password was not valid.</div>
+        <div>email or password was not valid.</div>
         <button
           className="button--close"
           onClick={(e) => invalidDialog.current.close()}
@@ -51,17 +48,22 @@ export const Login = () => {
       </dialog>
       <section>
         <form className="form--login" onSubmit={handleLogin}>
-          <h1>News Hounds</h1>
-          <h2>Please sign in</h2>
+          <Image
+            className="my-2"
+            src={logoLargeDetail}
+            width={1433 / 4}
+            height={1054 / 4}
+          />
+
           <fieldset>
-            <label htmlFor="inputUsername"> Username </label>
+            <label htmlFor="inputemail"> Email </label>
             <input
-              ref={username}
-              type="username"
-              id="username"
+              ref={email}
+              type="email"
+              id="email"
               className="form-control"
               defaultValue="me@me.com"
-              placeholder="username"
+              placeholder="email"
               required
               autoFocus
             />
