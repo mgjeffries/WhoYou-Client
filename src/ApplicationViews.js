@@ -1,5 +1,6 @@
 import React from "react";
 import { Route } from "react-router-dom";
+import { UserList } from "./components/user/UserList";
 import { UserProvider } from "./components/user/UserProvider";
 
 export const ApplicationViews = () => {
@@ -7,7 +8,7 @@ export const ApplicationViews = () => {
     <>
       <UserProvider>
         <Route exact path="/">
-          <div>Yo</div>
+          <UserList></UserList>
         </Route>
 
         <Route exact path="/users"></Route>
