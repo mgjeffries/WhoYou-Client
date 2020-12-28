@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
-import logoLargeDetail from "./logoLargeDetail.png";
+import logoLargeDetail from "../../images/logoLargeDetail.png";
 import { Image, Button, Form, Col } from "react-bootstrap";
 
 export const Login = () => {
