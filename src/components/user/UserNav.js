@@ -6,7 +6,6 @@ export const UserNav = () => {
     <Navbar style={{ minHeight: "5rem" }}>
       <Form inline>
         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
-        <Button type="submit">Submit</Button>
       </Form>
       <Button className="ml-auto">Drawer</Button>
     </Navbar>
