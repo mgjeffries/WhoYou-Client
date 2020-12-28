@@ -1,5 +1,6 @@
 import React from "react";
 import { Button, Navbar, FormControl, Form } from "react-bootstrap";
+import { GiHamburgerMenu } from "react-icons/gi";
 
 export const UserNav = () => {
   return (
@@ -7,7 +8,9 @@ export const UserNav = () => {
       <Form inline>
         <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
       </Form>
-      <Button className="ml-auto">Drawer</Button>
+      <Button variant="outline-secondary" className="ml-auto">
+        <GiHamburgerMenu />
+      </Button>
     </Navbar>
   );
 };
