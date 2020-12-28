@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { Col, Image, Form, Button, Row } from "react-bootstrap";
-import logoLargeDetail from "./logoLargeDetail.png";
+import logoLargeDetail from "../../images/logoLargeDetail.png";
 
 export const Register = (props) => {
   const [formValues, setFormValues] = useState({});
