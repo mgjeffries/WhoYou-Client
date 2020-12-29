@@ -4,7 +4,7 @@ import { GetContentByUserId } from "../content/GetContentByUserId.js";
 
 export const UserDetail = (props) => {
   // const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
-  const [userContent, setUserContent] = useState({});
+  const [userContent, setUserContent] = useState([]);
   const { userId } = useParams();
 
   useEffect(() => {
@@ -13,8 +13,13 @@ export const UserDetail = (props) => {
 
   return (
     <>
-      <div>User Detail for user {userId}</div>
-      <div>Content Count {userContent.length}</div>
+      {userContent.map((content) => {
+        return (
+          <div key={content.id}>
+            {content.field_type.name}: {content.value}
+          </div>
+        );
+      })}
     </>
   );
 };
