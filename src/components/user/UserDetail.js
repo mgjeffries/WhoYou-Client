@@ -46,13 +46,10 @@ export const UserDetail = (props) => {
                 {matchingRequest ? (
                   <BiCheckCircle style={{ color: "green", fontSize: "24px" }} />
                 ) : (
-                  "no"
+                  ""
                 )}
               </span>
             )}
-            <div>
-              Is there a matching request: {matchingRequest ? "yes" : "no"}
-            </div>
           </div>
         );
       })}
