@@ -8,9 +8,11 @@ import { BiCheckCircle } from "react-icons/bi";
 export const UserDetail = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
   const [userContent, setUserContent] = useState([]);
-  const { contentViewRequests, getContentViewRequests } = useContext(
-    ContentViewRequestContext
-  );
+  const {
+    contentViewRequests,
+    getContentViewRequests,
+    createContentViewRequest,
+  } = useContext(ContentViewRequestContext);
   const { userId } = useParams();
 
   useEffect(() => {
@@ -38,7 +40,14 @@ export const UserDetail = (props) => {
               matchingRequest ? (
                 <Button variant="primary-disabled">Request Sent</Button>
               ) : (
-                <Button variant="primary">Request Value</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => {
+                    createContentViewRequest(content.id);
+                  }}
+                >
+                  Request Value
+                </Button>
               )
             ) : (
               <span>

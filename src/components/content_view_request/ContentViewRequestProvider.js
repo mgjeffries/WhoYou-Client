@@ -17,11 +17,29 @@ export const ContentViewRequestProvider = (props) => {
       .then(setContentViewRequests);
   };
 
+  const createContentViewRequest = (contentId) => {
+    const requestBody = { content: contentId };
+    return fetch(`http://localhost:8000/contentViewRequest`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+      },
+      body: JSON.stringify(requestBody),
+    })
+      .then((res) => res.json())
+      .then((newContentViewRequest) => {
+        getContentViewRequests();
+        return newContentViewRequest;
+      });
+  };
+
   return (
     <ContentViewRequestContext.Provider
       value={{
         contentViewRequests,
         getContentViewRequests,
+        createContentViewRequest,
       }}
     >
       {props.children}
