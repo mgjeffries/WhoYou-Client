@@ -3,6 +3,7 @@ import { Route, Redirect } from "react-router-dom";
 import { ApplicationViews } from "./ApplicationViews";
 import { Login } from "./components/auth/Login";
 import { Register } from "./components/auth/Register";
+import { NavBar } from "./components/nav/NavBar";
 
 export const WhoYou = () => {
   return (
@@ -12,6 +13,7 @@ export const WhoYou = () => {
           if (localStorage.getItem("whoyou_user_token")) {
             return (
               <>
+                <NavBar />
                 <ApplicationViews />
               </>
             );
