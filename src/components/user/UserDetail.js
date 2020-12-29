@@ -8,7 +8,7 @@ export const UserDetail = (props) => {
   const { userId } = useParams();
 
   useEffect(() => {
-    const userContentResponse = GetContentByUserId(userId).then(setUserContent);
+    GetContentByUserId(userId).then(setUserContent);
   }, []);
 
   return (
