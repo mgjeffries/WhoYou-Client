@@ -26,7 +26,11 @@ export const NavBar = () => {
           <Button
             variant="outline-primary"
             className="mx-2 my-1 ml-md-auto"
-            onClick={() => history.push("/logout")}
+            onClick={() => {
+              localStorage.removeItem("whoyou_user_id");
+              localStorage.removeItem("whoyou_user_token");
+              history.push("/login");
+            }}
           >
             Logout
           </Button>
