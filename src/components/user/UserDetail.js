@@ -1,7 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
+import { Button } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { GetContentByUserId } from "../content/GetContentByUserId.js";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
+import { BiCheckCircle } from "react-icons/bi";
 
 export const UserDetail = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
@@ -27,12 +29,27 @@ export const UserDetail = (props) => {
             viewRequest.content.id === content.id
           );
         });
+        const isValueRestricted = content.value === "restricted value";
 
         return (
           <div key={content.id}>
-            <div>
-              {content.field_type.name}: {content.value}
-            </div>
+            <span>{content.field_type.name}: </span>
+            {isValueRestricted ? (
+              matchingRequest ? (
+                <Button variant="primary-disabled">Request Sent</Button>
+              ) : (
+                <Button variant="primary">Request Value</Button>
+              )
+            ) : (
+              <span>
+                {content.value}{" "}
+                {matchingRequest ? (
+                  <BiCheckCircle style={{ color: "green", fontSize: "24px" }} />
+                ) : (
+                  "no"
+                )}
+              </span>
+            )}
             <div>
               Is there a matching request: {matchingRequest ? "yes" : "no"}
             </div>
