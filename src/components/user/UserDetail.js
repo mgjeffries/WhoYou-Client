@@ -12,6 +12,7 @@ export const UserDetail = (props) => {
     contentViewRequests,
     getContentViewRequests,
     createContentViewRequest,
+    deleteContentViewRequest,
   } = useContext(ContentViewRequestContext);
   const { userId } = useParams();
 
@@ -38,7 +39,12 @@ export const UserDetail = (props) => {
             <span>{content.field_type.name}: </span>
             {isValueRestricted ? (
               matchingRequest ? (
-                <Button variant="primary-disabled">Request Sent</Button>
+                <Button
+                  variant="primary"
+                  onClick={() => deleteContentViewRequest(matchingRequest.id)}
+                >
+                  Request Sent
+                </Button>
               ) : (
                 <Button
                   variant="primary"

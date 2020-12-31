@@ -34,12 +34,26 @@ export const ContentViewRequestProvider = (props) => {
       });
   };
 
+  const deleteContentViewRequest = (contentViewRequestId) => {
+    return fetch(
+      `http://localhost:8000/contentViewRequest/${contentViewRequestId}`,
+      {
+        method: "DELETE",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+        },
+      }
+    ).then(() => getContentViewRequests());
+  };
+
   return (
     <ContentViewRequestContext.Provider
       value={{
         contentViewRequests,
         getContentViewRequests,
         createContentViewRequest,
+        deleteContentViewRequest,
       }}
     >
       {props.children}
