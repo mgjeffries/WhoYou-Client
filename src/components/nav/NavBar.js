@@ -25,6 +25,13 @@ export const NavBar = () => {
           </Button>
           <Button
             variant="outline-primary"
+            className="mx-2 my-1"
+            onClick={() => history.push("/notifications")}
+          >
+            notifications
+          </Button>
+          <Button
+            variant="outline-primary"
             className="mx-2 my-1 ml-md-auto"
             onClick={() => {
               localStorage.removeItem("whoyou_user_id");
