@@ -31,6 +31,9 @@ export const NotificationList = () => {
           <div key={contentViewRequest.id}>
             <div>{contentViewRequest.requester.name}</div>
             <div>{contentViewRequest.content.field_type.name}</div>
+            <div>
+              {contentViewRequest.is_approved ? "Approved" : "NOT Approved"}
+            </div>
           </div>
         );
       })}
