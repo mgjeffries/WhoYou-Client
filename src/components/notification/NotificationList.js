@@ -22,12 +22,17 @@ export const NotificationList = () => {
       }
     );
     setContentViewRequestsByOthers(updatedContentViewRequestsByOthers);
-  }, contentViewRequests);
+  }, [contentViewRequests]);
 
   return (
     <div>
       {contentViewRequestsByOthers.map((contentViewRequest) => {
-        return contentViewRequest.requester.name;
+        return (
+          <div key={contentViewRequest.id}>
+            <div>{contentViewRequest.requester.name}</div>
+            <div>{contentViewRequest.content.field_type.name}</div>
+          </div>
+        );
       })}
     </div>
   );
