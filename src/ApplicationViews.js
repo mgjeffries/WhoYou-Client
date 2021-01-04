@@ -3,6 +3,7 @@ import { Route } from "react-router-dom";
 import { ContentViewRequestProvider } from "./components/content_view_request/ContentViewRequestProvider";
 import { NotificationList } from "./components/notification/NotificationList";
 import { UserDetail } from "./components/user/UserDetail";
+import { UserEdit } from "./components/user/UserEdit";
 import { UserList } from "./components/user/UserList";
 import { UserProvider } from "./components/user/UserProvider";
 
@@ -21,6 +22,9 @@ export const ApplicationViews = () => {
           </Route>
           <Route exact path="/users/:userId(\d+)">
             <UserDetail />
+          </Route>
+          <Route exact path="/users/:userId(\d+)/edit">
+            <UserEdit />
           </Route>
         </ContentViewRequestProvider>
       </UserProvider>
