@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, ListGroup } from "react-bootstrap";
 import { useParams } from "react-router-dom";
 import { GetContentByUserId } from "../content/GetContentByUserId.js";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
@@ -22,7 +22,7 @@ export const UserDetail = (props) => {
   }, []);
 
   return (
-    <>
+    <ListGroup>
       {userContent.map((content) => {
         const matchingRequest = contentViewRequests.find((viewRequest) => {
           return (
@@ -35,7 +35,7 @@ export const UserDetail = (props) => {
         const isValueRestricted = content.value === "restricted value";
 
         return (
-          <div key={content.id}>
+          <ListGroup.Item key={content.id}>
             <span>{content.field_type.name}: </span>
             {isValueRestricted ? (
               matchingRequest ? (
@@ -65,9 +65,9 @@ export const UserDetail = (props) => {
                 )}
               </span>
             )}
-          </div>
+          </ListGroup.Item>
         );
       })}
-    </>
+    </ListGroup>
   );
 };
