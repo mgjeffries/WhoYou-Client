@@ -34,6 +34,20 @@ export const ContentViewRequestProvider = (props) => {
       });
   };
 
+  const approveContentViewRequest = (contentId, isApproved) => {
+    const requestBody = { is_approved: isApproved };
+    return fetch(`http://localhost:8000/contentViewRequest/${contentId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+      },
+      body: JSON.stringify(requestBody),
+    }).then((newContentViewRequest) => {
+      getContentViewRequests();
+    });
+  };
+
   const deleteContentViewRequest = (contentViewRequestId) => {
     return fetch(
       `http://localhost:8000/contentViewRequest/${contentViewRequestId}`,
@@ -54,6 +68,7 @@ export const ContentViewRequestProvider = (props) => {
         getContentViewRequests,
         createContentViewRequest,
         deleteContentViewRequest,
+        approveContentViewRequest,
       }}
     >
       {props.children}
