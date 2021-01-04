@@ -35,8 +35,8 @@ export const NotificationList = () => {
             <div>{contentViewRequest.requester.name}</div>
             <div>{contentViewRequest.content.field_type.name}</div>
             <ToggleButton
-              inactiveLabel={<div>X</div>}
-              activeLabel={<div>+</div>}
+              inactiveLabel={<div></div>}
+              activeLabel={<div></div>}
               value={contentViewRequest.is_approved}
               onToggle={(value) => {
                 approveContentViewRequest(contentViewRequest.id, !value);
