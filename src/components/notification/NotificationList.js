@@ -4,9 +4,11 @@ import { ContentViewRequestContext } from "../content_view_request/ContentViewRe
 
 export const NotificationList = () => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
-  const { contentViewRequests, getContentViewRequests } = useContext(
-    ContentViewRequestContext
-  );
+  const {
+    contentViewRequests,
+    getContentViewRequests,
+    approveContentViewRequest,
+  } = useContext(ContentViewRequestContext);
   const [
     contentViewRequestsByOthers,
     setContentViewRequestsByOthers,
@@ -36,15 +38,10 @@ export const NotificationList = () => {
               inactiveLabel={<div>X</div>}
               activeLabel={<div>+</div>}
               value={contentViewRequest.is_approved}
-              // onToggle={(value) => {
-              //   self.setState({
-              //     value: !value,
-              //   });
-              // }}
+              onToggle={(value) => {
+                approveContentViewRequest(contentViewRequest.id, !value);
+              }}
             />
-            <div>
-              {contentViewRequest.is_approved ? "Approved" : "NOT Approved"}
-            </div>
           </div>
         );
       })}
