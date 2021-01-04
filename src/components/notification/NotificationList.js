@@ -1,4 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
+import { ListGroup } from "react-bootstrap";
 import ToggleButton from "react-toggle-button";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider";
 
@@ -19,32 +20,37 @@ export const NotificationList = () => {
   }, []);
 
   useEffect(() => {
+    let updateRequestingUsers = [];
     const updatedContentViewRequestsByOthers = contentViewRequests.filter(
       (contentViewRequest) => {
         return contentViewRequest.requester.id !== currentUser;
       }
     );
+
     setContentViewRequestsByOthers(updatedContentViewRequestsByOthers);
   }, [contentViewRequests]);
 
   return (
-    <div>
+    <ListGroup>
       {contentViewRequestsByOthers.map((contentViewRequest) => {
         return (
-          <div key={contentViewRequest.id}>
-            <div>{contentViewRequest.requester.name}</div>
-            <div>{contentViewRequest.content.field_type.name}</div>
-            <ToggleButton
-              inactiveLabel={<div></div>}
-              activeLabel={<div></div>}
-              value={contentViewRequest.is_approved}
-              onToggle={(value) => {
-                approveContentViewRequest(contentViewRequest.id, !value);
-              }}
-            />
-          </div>
+          <ListGroup.Item key={contentViewRequest.id}>
+            <span>{contentViewRequest.requester.name}</span>
+            <span> is requesting your </span>
+            <span>{contentViewRequest.content.field_type.name}</span>
+            <span className="d-inline-flex px-2">
+              <ToggleButton
+                inactiveLabel={<div></div>}
+                activeLabel={<div></div>}
+                value={contentViewRequest.is_approved}
+                onToggle={(value) => {
+                  approveContentViewRequest(contentViewRequest.id, !value);
+                }}
+              />
+            </span>
+          </ListGroup.Item>
         );
       })}
-    </div>
+    </ListGroup>
   );
 };
