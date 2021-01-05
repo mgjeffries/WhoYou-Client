@@ -1,9 +1,9 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
 import { useHistory, useLocation, useParams } from "react-router-dom";
-import { GetContentByUserId } from "../content/GetContentByUserId.js";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { BiCheckCircle } from "react-icons/bi";
+import { ContentContext } from "../content/ContentProvider.js";
 
 export const UserDetail = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
@@ -16,24 +16,15 @@ export const UserDetail = (props) => {
   } = useContext(ContentViewRequestContext);
   const { userId } = useParams();
   const history = useHistory();
+  const { getContentByUserId } = useContext(ContentContext);
 
   useEffect(() => {
     getContentViewRequests();
-    GetContentByUserId(userId).then(setUserContent);
+    getContentByUserId(userId).then(setUserContent);
   }, []);
 
   return (
     <>
-      {currentUser === parseInt(userId) ? (
-        <Button
-          className="d-flex my-2 mx-auto"
-          onClick={() => history.push(`/users/${userId}/edit`)}
-        >
-          Edit Profile
-        </Button>
-      ) : (
-        ""
-      )}
       <ListGroup>
         {userContent.map((content) => {
           const matchingRequest = contentViewRequests.find((viewRequest) => {
@@ -83,6 +74,16 @@ export const UserDetail = (props) => {
           );
         })}
       </ListGroup>
+      {currentUser === parseInt(userId) ? (
+        <Button
+          className="d-flex my-2 mx-auto"
+          onClick={() => history.push(`/users/${userId}/edit`)}
+        >
+          Edit Profile
+        </Button>
+      ) : (
+        ""
+      )}
     </>
   );
 };
