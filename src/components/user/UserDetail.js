@@ -29,10 +29,13 @@ export const UserDetail = (props) => {
     <>
       <ListGroup className="container">
         {currentUser === parseInt(userId) ? (
-          <QRCode
-            className="d-flex mx-auto my-2"
-            value="https://github.com/mgjeffries/whoyou-client"
-          />
+          <>
+            <div className="d-flex mx-auto">Scan to share profile!</div>
+            <QRCode
+              className="d-flex mx-auto my-2"
+              value="https://github.com/mgjeffries/whoyou-client"
+            />
+          </>
         ) : (
           ""
         )}
