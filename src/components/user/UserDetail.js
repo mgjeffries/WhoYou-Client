@@ -26,7 +26,7 @@ export const UserDetail = (props) => {
 
   return (
     <>
-      <ListGroup>
+      <ListGroup className="container">
         {userContent.map((content) => {
           const matchingRequest = contentViewRequests.find((viewRequest) => {
             return (
@@ -39,12 +39,16 @@ export const UserDetail = (props) => {
           const isValueRestricted = content.value === "restricted value";
 
           return (
-            <ListGroup.Item key={content.id}>
-              <span>{content.field_type.name}: </span>
+            <ListGroup.Item key={content.id} className="d-flex flex-row">
+              <div className="d-flex">
+                {content.field_type.name}
+                {": "}
+              </div>
               {isValueRestricted ? (
                 matchingRequest ? (
                   <Button
                     variant="primary"
+                    className="ml-auto d-flex"
                     onClick={() => deleteContentViewRequest(matchingRequest.id)}
                   >
                     Request Sent
@@ -52,6 +56,7 @@ export const UserDetail = (props) => {
                 ) : (
                   <Button
                     variant="primary"
+                    className="ml-auto d-flex"
                     onClick={() => {
                       createContentViewRequest(content.id);
                     }}
@@ -60,21 +65,23 @@ export const UserDetail = (props) => {
                   </Button>
                 )
               ) : (
-                <div className="d-inline-flex">
-                  {content.value}{" "}
-                  {matchingRequest ? (
-                    <BiCheckCircle
-                      style={{ color: "green", fontSize: "24px" }}
-                    />
-                  ) : (
-                    ""
-                  )}
-                  {content.is_public ? (
-                    <GoGlobe style={{ color: "green", fontSize: "24px" }} />
-                  ) : (
-                    <GoLock style={{ color: "grey", fontSize: "24px" }} />
-                  )}
-                </div>
+                <>
+                  <div>{content.value} </div>
+                  <div className="ml-auto">
+                    {matchingRequest ? (
+                      <BiCheckCircle
+                        style={{ color: "green", fontSize: "24px" }}
+                      />
+                    ) : (
+                      ""
+                    )}
+                    {content.is_public ? (
+                      <GoGlobe style={{ color: "green", fontSize: "24px" }} />
+                    ) : (
+                      <GoLock style={{ color: "grey", fontSize: "24px" }} />
+                    )}
+                  </div>
+                </>
               )}
             </ListGroup.Item>
           );
