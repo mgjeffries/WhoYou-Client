@@ -1,6 +1,6 @@
 import React, { useContext, useEffect, useState } from "react";
 import { Button, ListGroup } from "react-bootstrap";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { BiCheckCircle } from "react-icons/bi";
 import { ContentContext } from "../content/ContentProvider.js";

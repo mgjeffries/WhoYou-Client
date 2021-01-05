@@ -20,7 +20,6 @@ export const NotificationList = () => {
   }, []);
 
   useEffect(() => {
-    let updateRequestingUsers = [];
     const updatedContentViewRequestsByOthers = contentViewRequests.filter(
       (contentViewRequest) => {
         return contentViewRequest.requester.id !== currentUser;

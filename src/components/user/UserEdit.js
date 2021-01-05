@@ -1,26 +1,20 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Form, FormGroup } from "react-bootstrap";
-import { useHistory, useLocation, useParams } from "react-router-dom";
+import { Button, Form } from "react-bootstrap";
+import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
-import { BiCheckCircle } from "react-icons/bi";
 import { ContentContext } from "../content/ContentProvider.js";
 
 export const UserEdit = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
   const [userContent, setUserContent] = useState([]);
   const { getContentByUserId, updateContent } = useContext(ContentContext);
-  const {
-    contentViewRequests,
-    getContentViewRequests,
-    createContentViewRequest,
-    deleteContentViewRequest,
-  } = useContext(ContentViewRequestContext);
+  const { getContentViewRequests } = useContext(ContentViewRequestContext);
   const { userId } = useParams();
   const history = useHistory();
 
   useEffect(() => {
     // Redirect users who don't own this profile
-    if (userId !== currentUser) {
+    if (parseInt(userId) !== currentUser) {
       history.push(`/users/${userId}`);
     }
     getContentViewRequests();
@@ -71,7 +65,7 @@ export const UserEdit = (props) => {
                 owner: content.owner.id,
                 is_public: content.is_public,
               };
-              updateContent(content.id, requestBody);
+              return updateContent(content.id, requestBody);
             });
             Promise.all(promises).then(() => history.push(`/users/${userId}`));
           }}
