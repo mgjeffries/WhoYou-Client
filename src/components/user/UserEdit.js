@@ -1,5 +1,5 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Col, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { ContentContext } from "../content/ContentProvider.js";
@@ -40,22 +40,27 @@ export const UserEdit = (props) => {
         {userContent.map((content, index) => {
           return (
             <Form.Group key={content.id} className="col">
-              <Form.Label>{content.field_type.name}: </Form.Label>
-
-              <Form.Control
-                value={content.value}
-                onChange={(changeEvent) => {
-                  handleValueChange(changeEvent, index);
-                }}
-              />
-              <ToggleButton
-                inactiveLabel={<div>Private</div>}
-                activeLabel={<div>Public</div>}
-                value={content.is_public}
-                onToggle={(value) => {
-                  handlePrivacyChange(value, index);
-                }}
-              />
+              <Form.Label>{content.field_type.name} </Form.Label>
+              <Form.Row>
+                <Col>
+                  <Form.Control
+                    value={content.value}
+                    onChange={(changeEvent) => {
+                      handleValueChange(changeEvent, index);
+                    }}
+                  />
+                </Col>
+                <Col className="col-auto d-flex">
+                  <ToggleButton
+                    inactiveLabel={<div>Private</div>}
+                    activeLabel={<div>Public</div>}
+                    value={content.is_public}
+                    onToggle={(value) => {
+                      handlePrivacyChange(value, index);
+                    }}
+                  />
+                </Col>
+              </Form.Row>
             </Form.Group>
           );
         })}
