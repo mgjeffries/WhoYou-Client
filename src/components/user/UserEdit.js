@@ -19,6 +19,10 @@ export const UserEdit = (props) => {
   const history = useHistory();
 
   useEffect(() => {
+    // Redirect users who don't own this profile
+    if (userId !== currentUser) {
+      history.push(`/users/${userId}`);
+    }
     getContentViewRequests();
     getContentByUserId(userId).then(setUserContent);
   }, []);
