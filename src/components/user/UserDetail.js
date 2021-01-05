@@ -3,6 +3,7 @@ import { Button, ListGroup } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { BiCheckCircle } from "react-icons/bi";
+import { GoGlobe } from "react-icons/go";
 import { ContentContext } from "../content/ContentProvider.js";
 
 export const UserDetail = (props) => {
@@ -65,6 +66,11 @@ export const UserDetail = (props) => {
                     <BiCheckCircle
                       style={{ color: "green", fontSize: "24px" }}
                     />
+                  ) : (
+                    ""
+                  )}
+                  {content.is_public ? (
+                    <GoGlobe style={{ color: "green", fontSize: "24px" }} />
                   ) : (
                     ""
                   )}
