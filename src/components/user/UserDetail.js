@@ -3,7 +3,7 @@ import { Button, ListGroup } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { BiCheckCircle } from "react-icons/bi";
-import { GoGlobe } from "react-icons/go";
+import { GoGlobe, GoLock } from "react-icons/go";
 import { ContentContext } from "../content/ContentProvider.js";
 
 export const UserDetail = (props) => {
@@ -60,7 +60,7 @@ export const UserDetail = (props) => {
                   </Button>
                 )
               ) : (
-                <span>
+                <div className="d-inline-flex">
                   {content.value}{" "}
                   {matchingRequest ? (
                     <BiCheckCircle
@@ -72,9 +72,9 @@ export const UserDetail = (props) => {
                   {content.is_public ? (
                     <GoGlobe style={{ color: "green", fontSize: "24px" }} />
                   ) : (
-                    ""
+                    <GoLock style={{ color: "grey", fontSize: "24px" }} />
                   )}
-                </span>
+                </div>
               )}
             </ListGroup.Item>
           );
