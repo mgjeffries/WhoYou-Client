@@ -3,6 +3,7 @@ import { Button, Form } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { ContentContext } from "../content/ContentProvider.js";
+import ToggleButton from "react-toggle-button";
 
 export const UserEdit = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
@@ -21,9 +22,15 @@ export const UserEdit = (props) => {
     getContentByUserId(userId).then(setUserContent);
   }, []);
 
-  const handleControlledValue = (changeEvent, index) => {
+  const handleValueChange = (changeEvent, index) => {
     let updatedUserContent = userContent.slice();
     updatedUserContent[index].value = changeEvent.target.value;
+    setUserContent(updatedUserContent);
+  };
+
+  const handlePrivacyChange = (toggleState, index) => {
+    let updatedUserContent = userContent.slice();
+    updatedUserContent[index].is_public = !toggleState;
     setUserContent(updatedUserContent);
   };
 
@@ -38,7 +45,15 @@ export const UserEdit = (props) => {
               <Form.Control
                 value={content.value}
                 onChange={(changeEvent) => {
-                  handleControlledValue(changeEvent, index);
+                  handleValueChange(changeEvent, index);
+                }}
+              />
+              <ToggleButton
+                inactiveLabel={<div>Private</div>}
+                activeLabel={<div>Public</div>}
+                value={content.is_public}
+                onToggle={(value) => {
+                  handlePrivacyChange(value, index);
                 }}
               />
             </Form.Group>
