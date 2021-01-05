@@ -18,6 +18,7 @@ export const UserDetail = (props) => {
   const { userId } = useParams();
   const history = useHistory();
   const { getContentByUserId } = useContext(ContentContext);
+  var QRCode = require("qrcode.react");
 
   useEffect(() => {
     getContentViewRequests();
@@ -27,6 +28,18 @@ export const UserDetail = (props) => {
   return (
     <>
       <ListGroup className="container">
+        {currentUser === parseInt(userId) ? (
+          <>
+            <div className="d-flex mx-auto">Scan to share profile!</div>
+            <QRCode
+              className="d-flex mx-auto my-2"
+              value="https://github.com/mgjeffries/whoyou-client"
+            />
+          </>
+        ) : (
+          ""
+        )}
+
         {userContent.map((content) => {
           const matchingRequest = contentViewRequests.find((viewRequest) => {
             return (

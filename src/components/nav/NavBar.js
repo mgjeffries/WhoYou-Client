@@ -9,7 +9,10 @@ export const NavBar = () => {
   const history = useHistory();
   return (
     <Navbar expand="md">
-      <Navbar.Brand as={Link} to="/">
+      <Navbar.Brand
+        as={Link}
+        to={`/users/${localStorage.getItem("whoyou_user_id")}`}
+      >
         <img className="navbar__logo" src={Logo} alt="WhoYou" />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
