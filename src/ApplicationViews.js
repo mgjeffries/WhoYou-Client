@@ -14,7 +14,9 @@ export const ApplicationViews = () => {
       <UserProvider>
         <ContentViewRequestProvider>
           <ContentProvider>
-            <Route exact path="/"></Route>
+            <Route exact path="/">
+              <UserList />
+            </Route>
 
             <Route exact path="/users">
               <UserList />
