@@ -2,6 +2,7 @@ import React, { useRef } from "react";
 import { Link, useHistory } from "react-router-dom";
 import logoLargeDetail from "../../images/logoLargeDetail.png";
 import { Image, Button, Form, Col } from "react-bootstrap";
+import { ServerPath } from "../../ServerPath.js";
 
 export const Login = () => {
   const email = useRef();
@@ -12,7 +13,7 @@ export const Login = () => {
   const handleLogin = (e) => {
     e.preventDefault();
 
-    return fetch("http://localhost:8000/login", {
+    return fetch(`${ServerPath}/login`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
