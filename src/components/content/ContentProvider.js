@@ -1,10 +1,11 @@
 import React from "react";
+import { ServerPath } from "../../ServerPath.js";
 
 export const ContentContext = React.createContext();
 
 export const ContentProvider = (props) => {
   const getContentByUserId = (contentOwnerId) => {
-    return fetch(`http://localhost:8000/content?owner=${contentOwnerId}`, {
+    return fetch(`${ServerPath}/content?owner=${contentOwnerId}`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
         "Content-Type": "application/json",
@@ -13,7 +14,7 @@ export const ContentProvider = (props) => {
   };
 
   const updateContent = (contentId, requestBody) => {
-    return fetch(`http://localhost:8000/content/${contentId}`, {
+    return fetch(`${ServerPath}/content/${contentId}`, {
       method: "PUT",
       headers: {
         Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { ServerPath } from "../../ServerPath.js";
 
 export const ContentViewRequestContext = React.createContext();
 
@@ -7,7 +8,7 @@ export const ContentViewRequestProvider = (props) => {
 
   const getContentViewRequests = () => {
     //TODO: This will get the content view requests to/from the active user
-    return fetch("http://localhost:8000/contentViewRequest", {
+    return fetch(`${ServerPath}/contentViewRequest`, {
       headers: {
         Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
         "Content-Type": "application/json",
@@ -19,7 +20,7 @@ export const ContentViewRequestProvider = (props) => {
 
   const createContentViewRequest = (contentId) => {
     const requestBody = { content: contentId };
-    return fetch(`http://localhost:8000/contentViewRequest`, {
+    return fetch(`${ServerPath}/contentViewRequest`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -36,7 +37,7 @@ export const ContentViewRequestProvider = (props) => {
 
   const approveContentViewRequest = (contentId, isApproved) => {
     const requestBody = { is_approved: isApproved };
-    return fetch(`http://localhost:8000/contentViewRequest/${contentId}`, {
+    return fetch(`${ServerPath}/contentViewRequest/${contentId}`, {
       method: "PATCH",
       headers: {
         "Content-Type": "application/json",
@@ -49,16 +50,13 @@ export const ContentViewRequestProvider = (props) => {
   };
 
   const deleteContentViewRequest = (contentViewRequestId) => {
-    return fetch(
-      `http://localhost:8000/contentViewRequest/${contentViewRequestId}`,
-      {
-        method: "DELETE",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
-        },
-      }
-    ).then(() => getContentViewRequests());
+    return fetch(`${ServerPath}/contentViewRequest/${contentViewRequestId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+      },
+    }).then(() => getContentViewRequests());
   };
 
   return (
