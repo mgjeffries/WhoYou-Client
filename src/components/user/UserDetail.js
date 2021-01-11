@@ -23,7 +23,7 @@ export const UserDetail = (props) => {
   useEffect(() => {
     getContentViewRequests();
     getContentByUserId(userId).then(setUserContent);
-  }, []);
+  }, [userId]);
 
   return (
     <>
