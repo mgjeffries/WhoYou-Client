@@ -1,5 +1,5 @@
 import React, { useContext, useEffect } from "react";
-import { Image, ListGroup } from "react-bootstrap";
+import { Container, Image, ListGroup } from "react-bootstrap";
 import { useHistory } from "react-router-dom";
 import { UserContext } from "./UserProvider";
 import avitarPlaceholder from "../../images/avitarPlaceholder192.png";
@@ -11,7 +11,7 @@ export const UserList = () => {
   useEffect(getUsers, []);
 
   return (
-    <>
+    <Container>
       {users.map((user) => {
         return (
           <ListGroup.Item
@@ -23,6 +23,6 @@ export const UserList = () => {
           </ListGroup.Item>
         );
       })}
-    </>
+    </Container>
   );
 };
