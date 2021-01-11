@@ -7,6 +7,7 @@ import { Button, FormControl } from "react-bootstrap";
 
 export const NavBar = () => {
   const history = useHistory();
+
   return (
     <Navbar expand="md">
       <Navbar.Brand
@@ -18,7 +19,6 @@ export const NavBar = () => {
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav container ">
         <Nav className="mr-auto container-fluid">
-          <FormControl type="text" placeholder="Search" className=" mr-sm-2" />
           <Button
             variant="outline-primary"
             className="mx-2 my-1"
