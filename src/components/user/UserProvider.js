@@ -12,11 +12,22 @@ export const UserProvider = (props) => {
       .then(setUsers);
   };
 
+  const searchUsers = (searchString) => {
+    if (searchString != "") {
+      return fetch(`${ServerPath}/users?name=${searchString}`)
+        .then((res) => res.json())
+        .then(setUsers);
+    } else {
+      getUsers();
+    }
+  };
+
   return (
     <UserContext.Provider
       value={{
         users,
         getUsers,
+        searchUsers,
       }}
     >
       {props.children}
