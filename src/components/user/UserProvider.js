@@ -22,7 +22,7 @@ export const UserProvider = (props) => {
       body: JSON.stringify({
         profile_image_path: avitar,
       }),
-    });
+    }).then(getUsers);
   };
 
   const searchUsers = (searchString) => {
