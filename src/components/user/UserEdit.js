@@ -4,13 +4,16 @@ import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { ContentContext } from "../content/ContentProvider.js";
 import ToggleButton from "react-toggle-button";
+import { UserContext } from "./UserProvider.js";
 
 export const UserEdit = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
   const [userContent, setUserContent] = useState([]);
   const { getContentByUserId, updateContent } = useContext(ContentContext);
   const { getContentViewRequests } = useContext(ContentViewRequestContext);
+  const { updateUserAvitar } = useContext(UserContext);
   const { userId } = useParams();
+  const [userAvitar, setUserAvitar] = useState(""); //TODO: the user avitar state should be initially set to the user's current profile
   const history = useHistory();
 
   useEffect(() => {
@@ -34,9 +37,32 @@ export const UserEdit = (props) => {
     setUserContent(updatedUserContent);
   };
 
+  const getBase64 = (file, callback) => {
+    const reader = new FileReader();
+    reader.addEventListener("load", () => callback(reader.result));
+    reader.readAsDataURL(file);
+  };
+
+  const createUserAvitarString = (event) => {
+    getBase64(event.target.files[0], (base64ImageString) => {
+      console.log("Base64 of file is", base64ImageString);
+      setUserAvitar(base64ImageString);
+
+      // Update a component state variable to the value of base64ImageString
+    });
+  };
+
   return (
     <>
       <Form className="container">
+        <input type="file" onChange={createUserAvitarString} />
+        <button
+          onClick={() => {
+            updateUserAvitar(currentUser, userAvitar);
+          }}
+        >
+          Upload
+        </button>
         {userContent.map((content, index) => {
           return (
             <Form.Group key={content.id} className="col">

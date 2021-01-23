@@ -12,6 +12,19 @@ export const UserProvider = (props) => {
       .then(setUsers);
   };
 
+  const updateUserAvitar = (userId, avitar) => {
+    return fetch(`${ServerPath}/users/${userId}`, {
+      method: "PUT",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+      },
+      body: JSON.stringify({
+        profile_image_path: avitar,
+      }),
+    });
+  };
+
   const searchUsers = (searchString) => {
     if (searchString != "") {
       return fetch(`${ServerPath}/users?name=${searchString}`)
@@ -28,6 +41,7 @@ export const UserProvider = (props) => {
         users,
         getUsers,
         searchUsers,
+        updateUserAvitar,
       }}
     >
       {props.children}
