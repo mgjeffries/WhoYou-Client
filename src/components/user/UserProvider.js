@@ -14,7 +14,7 @@ export const UserProvider = (props) => {
 
   const updateUserAvitar = (userId, avitar) => {
     return fetch(`${ServerPath}/users/${userId}`, {
-      method: "PUT",
+      method: "PATCH",
       headers: {
         "Content-Type": "application/json",
         Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
