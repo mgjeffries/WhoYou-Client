@@ -45,24 +45,26 @@ export const UserEdit = (props) => {
 
   const createUserAvitarString = (event) => {
     getBase64(event.target.files[0], (base64ImageString) => {
-      console.log("Base64 of file is", base64ImageString);
       setUserAvitar(base64ImageString);
-
-      // Update a component state variable to the value of base64ImageString
     });
   };
 
   return (
     <>
       <Form className="container">
-        <input type="file" onChange={createUserAvitarString} />
-        <button
-          onClick={() => {
-            updateUserAvitar(currentUser, userAvitar);
-          }}
-        >
-          Upload
-        </button>
+        <Form.Group>
+          <Form.Label>Profile Image </Form.Label>
+          <Form.Row>
+            <input type="file" onChange={createUserAvitarString} />
+            <Button
+              onClick={() => {
+                updateUserAvitar(currentUser, userAvitar);
+              }}
+            >
+              Upload
+            </Button>
+          </Form.Row>
+        </Form.Group>
         {userContent.map((content, index) => {
           return (
             <Form.Group key={content.id} className="col">
