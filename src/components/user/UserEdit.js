@@ -15,7 +15,7 @@ export const UserEdit = (props) => {
   const { getContentViewRequests } = useContext(ContentViewRequestContext);
   const { updateUserAvitar } = useContext(UserContext);
   const { userId } = useParams();
-  const [userAvitar, setUserAvitar] = useState(avitarPlaceholder); //TODO: the user avitar state should be initially set to the user's current profile
+  const [userAvitar, setUserAvitar] = useState(avitarPlaceholder);
   const history = useHistory();
 
   useEffect(() => {

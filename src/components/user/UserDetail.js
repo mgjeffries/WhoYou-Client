@@ -1,10 +1,12 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, ListGroup } from "react-bootstrap";
+import { Button, Image, ListGroup } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { BiCheckCircle } from "react-icons/bi";
 import { GoGlobe, GoLock } from "react-icons/go";
 import { ContentContext } from "../content/ContentProvider.js";
+import avitarPlaceholder from "../../images/avitarPlaceholder192.png";
+import { UserContext } from "./UserProvider.js";
 
 export const UserDetail = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
@@ -18,12 +20,24 @@ export const UserDetail = (props) => {
   const { userId } = useParams();
   const history = useHistory();
   const { getContentByUserId } = useContext(ContentContext);
+  const { users, getUsers } = useContext(UserContext);
+  const [userAvitar, setUserAvitar] = useState(avitarPlaceholder);
   var QRCode = require("qrcode.react");
 
   useEffect(() => {
     getContentViewRequests();
     getContentByUserId(userId).then(setUserContent);
+    getUsers();
   }, [userId]);
+
+  useEffect(() => {
+    const user = users.find((u) => u.id === parseInt(userId));
+    user // Check if the user data has been retrieved
+      ? user.profile_image_path === null // Check if the user's profile image is null
+        ? setUserAvitar(avitarPlaceholder)
+        : setUserAvitar(user.profile_image_path)
+      : setUserAvitar(avitarPlaceholder);
+  }, [users]);
 
   return (
     <>
@@ -37,7 +51,7 @@ export const UserDetail = (props) => {
             />
           </>
         ) : (
-          ""
+          <Image className="d-flex mx-auto" src={userAvitar} width="30%" />
         )}
 
         {userContent.map((content) => {
