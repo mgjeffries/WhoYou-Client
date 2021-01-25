@@ -1,19 +1,21 @@
 import React, { useContext, useEffect, useState } from "react";
-import { Button, Col, Form } from "react-bootstrap";
+import { Button, Col, Form, Image } from "react-bootstrap";
 import { useHistory, useParams } from "react-router-dom";
 import { ContentViewRequestContext } from "../content_view_request/ContentViewRequestProvider.js";
 import { ContentContext } from "../content/ContentProvider.js";
 import ToggleButton from "react-toggle-button";
 import { UserContext } from "./UserProvider.js";
+import avitarPlaceholder from "../../images/avitarPlaceholder192.png";
 
 export const UserEdit = (props) => {
   const currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
   const [userContent, setUserContent] = useState([]);
+  const { users, getUsers } = useContext(UserContext);
   const { getContentByUserId, updateContent } = useContext(ContentContext);
   const { getContentViewRequests } = useContext(ContentViewRequestContext);
   const { updateUserAvitar } = useContext(UserContext);
   const { userId } = useParams();
-  const [userAvitar, setUserAvitar] = useState(""); //TODO: the user avitar state should be initially set to the user's current profile
+  const [userAvitar, setUserAvitar] = useState(avitarPlaceholder); //TODO: the user avitar state should be initially set to the user's current profile
   const history = useHistory();
 
   useEffect(() => {
@@ -23,7 +25,12 @@ export const UserEdit = (props) => {
     }
     getContentViewRequests();
     getContentByUserId(userId).then(setUserContent);
+    getUsers();
   }, []);
+
+  useEffect(() => {
+    setUserAvitar(users.find((u) => u.id === currentUser).profile_image_path);
+  }, [users]);
 
   const handleValueChange = (changeEvent, index) => {
     let updatedUserContent = userContent.slice();
@@ -53,6 +60,7 @@ export const UserEdit = (props) => {
     <>
       <Form className="container">
         <Form.Group>
+          <Image src={userAvitar} width="10%" />
           <Form.Label>Profile Image </Form.Label>
           <Form.Row>
             <input type="file" onChange={createUserAvitarString} />
