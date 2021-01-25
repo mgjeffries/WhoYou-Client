@@ -33,7 +33,10 @@ export const UserList = () => {
             key={user.id}
             onClick={() => history.push(`users/${user.id}`)}
           >
-            <Image src={avitarPlaceholder} width="10%" />
+            <Image
+              src={user.profile_image_path || avitarPlaceholder}
+              width="10%"
+            />
             {user.name}
           </ListGroup.Item>
         );
