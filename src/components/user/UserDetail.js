@@ -51,7 +51,12 @@ export const UserDetail = (props) => {
             />
           </>
         ) : (
-          <Image className="d-flex mx-auto" src={userAvitar} width="30%" />
+          <Image
+            className="d-flex mx-auto"
+            src={userAvitar}
+            width="30%"
+            rounded
+          />
         )}
 
         {userContent.map((content) => {

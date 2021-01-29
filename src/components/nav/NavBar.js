@@ -3,7 +3,7 @@ import { Link, useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "../../images/logo192.png";
-import { Button, FormControl } from "react-bootstrap";
+import { Button, FormControl, Image } from "react-bootstrap";
 import { UserContext } from "../user/UserProvider";
 
 export const NavBar = () => {
@@ -20,10 +20,11 @@ export const NavBar = () => {
         as={Link}
         to={`/users/${localStorage.getItem("whoyou_user_id")}`}
       >
-        <img
+        <Image
           className="navbar__logo"
           src={thisUser ? thisUser.profile_image_path : Logo}
           alt="WhoYou"
+          rounded
         />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />

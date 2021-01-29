@@ -36,8 +36,9 @@ export const UserList = () => {
             <Image
               src={user.profile_image_path || avitarPlaceholder}
               width="10%"
+              rounded
             />
-            {user.name}
+            <div className="d-inline-flex mx-2">{user.name}</div>
           </ListGroup.Item>
         );
       })}
