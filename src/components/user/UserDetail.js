@@ -47,7 +47,7 @@ export const UserDetail = (props) => {
             <div className="d-flex mx-auto">Scan to share profile!</div>
             <QRCode
               className="d-flex mx-auto my-2"
-              value="https://github.com/mgjeffries/whoyou-client"
+              value={window.location.href}
             />
           </>
         ) : (
