@@ -14,6 +14,15 @@ export const NavBar = () => {
     getUsers();
   }, []);
 
+  const getAvitarImage = () => {
+    if (thisUser) {
+      if (thisUser.profile_image_path !== null) {
+        return thisUser.profile_image_path;
+      }
+    }
+    return Logo;
+  };
+
   return (
     <Navbar expand="md">
       <Navbar.Brand
@@ -22,7 +31,7 @@ export const NavBar = () => {
       >
         <Image
           className="navbar__logo"
-          src={thisUser ? thisUser.profile_image_path : Logo}
+          src={getAvitarImage()}
           alt="WhoYou"
           width="50%"
           rounded
