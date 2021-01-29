@@ -24,6 +24,7 @@ export const NavBar = () => {
           className="navbar__logo"
           src={thisUser ? thisUser.profile_image_path : Logo}
           alt="WhoYou"
+          width="50%"
           rounded
         />
       </Navbar.Brand>
