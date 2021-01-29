@@ -8,16 +8,18 @@ export const UserProvider = (props) => {
   const [thisUser, setThisUser] = useState({});
   let currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
 
-  const setThisUserToCurrent = () => {
-    const thisUserFound = users.find((user) => user.id === currentUser);
+  const setThisUserToCurrent = (newUsers) => {
+    const thisUserFound = newUsers.find((user) => user.id === currentUser);
     setThisUser(thisUserFound);
   };
 
   const getUsers = () => {
     return fetch(`${ServerPath}/users`)
       .then((res) => res.json())
-      .then(setUsers)
-      .then(() => setThisUserToCurrent());
+      .then((newUsers) => {
+        setThisUserToCurrent(newUsers);
+        setUsers(newUsers);
+      });
   };
 
   const updateUserAvitar = (userId, avitar) => {
