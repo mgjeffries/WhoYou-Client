@@ -5,11 +5,34 @@ export const UserContext = React.createContext();
 
 export const UserProvider = (props) => {
   const [users, setUsers] = useState([]);
+  const [thisUser, setThisUser] = useState({});
+  let currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
+
+  const setThisUserToCurrent = (newUsers) => {
+    const thisUserFound = newUsers.find((user) => user.id === currentUser);
+    setThisUser(thisUserFound);
+  };
 
   const getUsers = () => {
     return fetch(`${ServerPath}/users`)
       .then((res) => res.json())
-      .then(setUsers);
+      .then((newUsers) => {
+        setThisUserToCurrent(newUsers);
+        setUsers(newUsers);
+      });
+  };
+
+  const updateUserAvitar = (userId, avitar) => {
+    return fetch(`${ServerPath}/users/${userId}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Token ${localStorage.getItem("whoyou_user_token")}`,
+      },
+      body: JSON.stringify({
+        profile_image_path: avitar,
+      }),
+    }).then(getUsers);
   };
 
   const searchUsers = (searchString) => {
@@ -26,8 +49,10 @@ export const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         users,
+        thisUser,
         getUsers,
         searchUsers,
+        updateUserAvitar,
       }}
     >
       {props.children}
