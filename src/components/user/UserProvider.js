@@ -5,11 +5,19 @@ export const UserContext = React.createContext();
 
 export const UserProvider = (props) => {
   const [users, setUsers] = useState([]);
+  const [thisUser, setThisUser] = useState({});
+  let currentUser = parseInt(localStorage.getItem("whoyou_user_id"));
+
+  const setThisUserToCurrent = () => {
+    const thisUserFound = users.find((user) => user.id === currentUser);
+    setThisUser(thisUserFound);
+  };
 
   const getUsers = () => {
     return fetch(`${ServerPath}/users`)
       .then((res) => res.json())
-      .then(setUsers);
+      .then(setUsers)
+      .then(() => setThisUserToCurrent());
   };
 
   const updateUserAvitar = (userId, avitar) => {
@@ -39,6 +47,7 @@ export const UserProvider = (props) => {
     <UserContext.Provider
       value={{
         users,
+        thisUser,
         getUsers,
         searchUsers,
         updateUserAvitar,

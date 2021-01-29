@@ -1,12 +1,18 @@
-import React from "react";
+import React, { useContext, useEffect } from "react";
 import { Link, useHistory } from "react-router-dom";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "../../images/logo192.png";
 import { Button, FormControl } from "react-bootstrap";
+import { UserContext } from "../user/UserProvider";
 
 export const NavBar = () => {
   const history = useHistory();
+  const { thisUser, getUsers } = useContext(UserContext);
+
+  useEffect(() => {
+    getUsers();
+  }, []);
 
   return (
     <Navbar expand="md">
@@ -14,7 +20,11 @@ export const NavBar = () => {
         as={Link}
         to={`/users/${localStorage.getItem("whoyou_user_id")}`}
       >
-        <img className="navbar__logo" src={Logo} alt="WhoYou" />
+        <img
+          className="navbar__logo"
+          src={thisUser ? thisUser.profile_image_path : Logo}
+          alt="WhoYou"
+        />
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       <Navbar.Collapse id="basic-navbar-nav container ">

@@ -29,7 +29,10 @@ export const UserEdit = (props) => {
   }, []);
 
   useEffect(() => {
-    setUserAvitar(users.find((u) => u.id === currentUser).profile_image_path);
+    const thisUser = users.find((u) => u.id === currentUser);
+    if (thisUser) {
+      setUserAvitar(thisUser.profile_image_path);
+    }
   }, [users]);
 
   const handleValueChange = (changeEvent, index) => {
